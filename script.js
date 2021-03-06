@@ -63,8 +63,8 @@ function removeLoadingSpinner(){
 }
 
 //Event Listeners
-newQuoteBtn.addEventListener('click', getQuote);
+newQuoteBtn.addEventListener('click', getQuoteFromAPI);
 twitterBtn.addEventListener('click', tweetQuote);
 
 // On load
-getQuote();
+getQuoteFromAPI();
