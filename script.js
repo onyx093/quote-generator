@@ -6,10 +6,11 @@ const newQuoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
 // Get quote from API
-async function getQuote(){
+async function getQuoteFromAPI(){
     showLoadingSpinner();
     //const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json';
+    let counter = 0
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -31,8 +32,13 @@ async function getQuote(){
         quoteText.innerText = data.quoteText;
         //console.log(data);
     } catch (error) {
-        //getQuote();
-        console.log('Whoops, no qoute', error);
+        if(counter <= 7){
+            getQuoteFromAPI();
+            counter += 1
+        }else{
+            console.log('Whoops, no qoute', error);
+            counter = 0
+        }
     }
 }
 
@@ -62,4 +68,3 @@ twitterBtn.addEventListener('click', tweetQuote);
 
 // On load
 getQuote();
-//loading();
